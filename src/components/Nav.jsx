@@ -1,10 +1,18 @@
 function Nav(props){
   return(
-    <nav className="flex justify-between items-center px-6 py-4">
-      <WebsiteName/>
-      {props.children.map((items)=>{
-        <Nav-item>{item}</Nav-item>
-      })}
+    <nav>
+      <div className="flex justify-between">
+        <div>Interview Os</div>
+        <div className="flex ">
+          {props.children.map((item)=>{
+            <A>{item}</A>
+            {if(item.icon==true){
+              <ChevronDown />
+            }}
+          })}
+        </div>
+      </div>
     </nav>
   );
 }
+export default Nav;
