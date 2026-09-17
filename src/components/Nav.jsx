@@ -1,14 +1,14 @@
+import { ChevronDown } from "lucide-react";
+import A from "./Anchor";
+import AppName from "./AppName";
 function Nav(props){
   return(
     <nav>
       <div className="flex justify-between">
-        <div>Interview Os</div>
-        <div className="flex ">
+        <AppName/>
+        <div className="flex  gap-4 justify-between mx-2">
           {props.children.map((item)=>{
-            <A>{item}</A>
-            {if(item.icon==true){
-              <ChevronDown />
-            }}
+            return<A className="flex" key="item.name" link={item.link} type="items.type">{item.name} {item.icon && <ChevronDown className="m-2 text-2xl"size={16}/>}</A>
           })}
         </div>
       </div>
