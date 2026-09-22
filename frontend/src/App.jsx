@@ -1,14 +1,15 @@
-import Nav from "./components/Nav.jsx";
-import Introduction from "./components/Introduction.jsx"
-import {NavLinks} from "./model/NavLinks";
+import { Routes, Route } from "react-router-dom";
+import PublicLayout from "./Layouts/PublicLayout";
+import DashboardLayout from "./Layouts/DashboardLayout";
+import Login from "./pages/auth/login";
 function App() {
   return (
-    <>
-    <Nav>
-      {NavLinks}
-    </Nav>
-    <Introduction></Introduction>
-    </>
+    <Routes>
+      <Route path="/" element={<PublicLayout />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<DashboardLayout />} />
+    </Routes>
   );
 }
+
 export default App;
