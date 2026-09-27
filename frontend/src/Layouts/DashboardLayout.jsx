@@ -1,7 +1,11 @@
+import {SideNavLinks} from "../model/SideNavLinks";
+import SideNav from "../components/sideNav"
+import Footer from "../components/Footer";
 function DashboardLayout() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <SideNav links={SideNavLinks}></SideNav>
+      <Footer login={true}></Footer>
     </div>
   );
 }

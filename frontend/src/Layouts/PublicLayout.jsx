@@ -9,7 +9,7 @@ function PublicLayout() {
       {NavLinks}
     </Nav>
     <Introduction></Introduction>
-    <Footer></Footer>
+    <Footer login={false}></Footer>
     </>
   );
 }
