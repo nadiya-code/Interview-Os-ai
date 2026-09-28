@@ -1,7 +1,20 @@
-function SA(props){
-  let className=" flex text-2xl m-2 p-2";
-  return(
-    <a className={className} href={props.link}>{props.children}</a>
- );
+import { NavLink } from "react-router-dom";
+
+function SideAnchor({ link, children }) {
+  return (
+    <NavLink
+      to={link}
+      className={({ isActive }) =>
+        `px-3 py-2 rounded-lg text-sm transition ${
+          isActive
+            ? "bg-blue-600 text-white"
+            : "text-slate-400 hover:bg-slate-800 hover:text-white"
+        }`
+      }
+    >
+      {children}
+    </NavLink>
+  );
 }
-export default SA;
+
+export default SideAnchor;

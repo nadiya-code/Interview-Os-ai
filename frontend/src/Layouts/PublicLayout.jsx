@@ -5,8 +5,7 @@ import Footer from "../components/Footer.jsx";
 function PublicLayout() {
   return (
     <>
-    <Nav>
-      {NavLinks}
+    <Nav links={NavLinks}>
     </Nav>
     <Introduction></Introduction>
     <Footer login={false}></Footer>
