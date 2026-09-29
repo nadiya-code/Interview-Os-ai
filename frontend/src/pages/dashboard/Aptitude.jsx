@@ -1,8 +1,12 @@
-import Dashboard from "./Dashboard";
-
 function Aptitude() {
   return (
-    <Dashboard/>
+    <div>
+      <h1 className="text-2xl font-bold">
+        Aptitude
+      </h1>
+
+      <p>Aptitude content here</p>
+    </div>
   );
 }
 

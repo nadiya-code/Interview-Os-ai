@@ -1,19 +1,13 @@
-import { useState } from "react";
-import { menu } from "../../model/SideNavLinks";
-import SideNav from "../../components/sideNav";
-
 function Dashboard() {
-  const [isOpen, setIsOpen] = useState(true);
-
   return (
-    <div className="flex min-h-screen">
+    <div>
+      <h1 className="text-2xl font-bold">
+        Dashboard
+      </h1>
 
-      <SideNav
-        links={menu}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-      <main></main>
+      <p>
+        Welcome to your dashboard.
+      </p>
     </div>
   );
 }
