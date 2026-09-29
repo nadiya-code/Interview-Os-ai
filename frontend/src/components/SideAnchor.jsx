@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-
-function SideAnchor({ link, children }) {
+function SideAnchor({ link, children, end = false }) {
   return (
     <NavLink
       to={link}
+      end={end}
       className={({ isActive }) =>
         `px-3 py-2 rounded-lg text-sm transition ${
           isActive

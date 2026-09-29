@@ -2,7 +2,7 @@ const menu = [
     {
       title: "MAIN",
       items: [
-        { name: "Dashboard", link: "/dashboard" }
+        { name: "Dashboard", link: "/dashboard" ,end: true}
       ]
     },
     {

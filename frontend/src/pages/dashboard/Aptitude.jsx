@@ -1,9 +1,9 @@
 import Dashboard from "./Dashboard";
 
-function Core() {
+function Aptitude() {
   return (
     <Dashboard/>
   );
 }
 
-export default Core;
+export default Aptitude;

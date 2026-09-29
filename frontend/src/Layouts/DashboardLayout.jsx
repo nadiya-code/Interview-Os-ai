@@ -1,13 +1,9 @@
-import {menu} from "../model/SideNavLinks";
-import SideNav from "../components/sideNav"
+import Dashboard from "../pages/dashboard/Dashboard";
+
 function DashboardLayout() {
   return (
-    <div>
-      <div>
-        <SideNav links={menu}></SideNav>
-      </div>
-    </div>
+    <Dashboard/>
   );
 }
 
-export default DashboardLayout;
+export default  DashboardLayout;
