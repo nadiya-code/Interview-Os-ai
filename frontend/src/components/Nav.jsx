@@ -1,20 +1,52 @@
 import { ChevronDown } from "lucide-react";
-import A from "./Anchor";
+import { Link } from "react-router-dom";
 import AppName from "./AppName";
 import ButtonAnchor from "./ButtonAnchor";
-function Nav(props){
-  return(
-    <nav>
-      <div className="flex justify-between items-center bg-black text-white">
-        <AppName/>
-        <div className="flex  gap-4 justify-between mx-2 my-2">
-          {props.links.map((item)=>{
-            return<A className="flex" key={item.name} link={item.link} type={item.type}>{item.name} {item.icon && <ChevronDown className="m-2 text-2xl"size={16}/>}</A>
-          })}
+
+function Nav({ links }) {
+  return (
+    <nav className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+
+        {/* Logo */}
+        <Link to="/" className="shrink-0">
+          <AppName />
+        </Link>
+
+        {/* Navigation */}
+        <div className="hidden items-center gap-2 md:flex">
+          {links.map((item) => (
+            <Link
+              key={item.name}
+              to={item.link}
+              className="flex items-center rounded-lg px-4 py-2 text-sm
+                         font-medium text-gray-200 transition
+                         hover:bg-gray-800 hover:text-white"
+            >
+              {item.name}
+
+              {item.icon && (
+                <ChevronDown
+                  size={16}
+                  className="ml-1"
+                />
+              )}
+            </Link>
+          ))}
         </div>
-        <ButtonAnchor>Get Started </ButtonAnchor>
+
+        {/* Get Started */}
+        <ButtonAnchor
+          to="/signup"
+          background="bg-teal-500"
+          textcolor="text-black"
+        >
+          Get Started
+        </ButtonAnchor>
+
       </div>
     </nav>
   );
 }
+
 export default Nav;

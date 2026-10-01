@@ -163,5 +163,4 @@ function Aptitude() {
     </div>
   );
 }
-
 export default Aptitude;
