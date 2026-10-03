@@ -8,18 +8,16 @@ function DashboardLayout() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="flex h-screen overflow-hidden">
-
+    <div className="flex h-screen overflow-hidden bg-slate-100">
       <SideNav
         links={menu}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
 
-      <main className="flex-1 p-6 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto p-4 sm:p-6">
         <Outlet />
       </main>
-
     </div>
   );
 }
