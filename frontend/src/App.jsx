@@ -15,6 +15,9 @@ import Core from "./pages/dashboard/Core";
 import Aptitude from "./pages/dashboard/Aptitude";
 import MockInterview from "./pages/dashboard/MockInterview";
 
+// DSA Pages
+import DsaTopic from "./pages/dashboard/dsa/DsaTopic";
+
 // Mock Interview Pages
 import MockInterviewSetup from "./pages/dashboard/mockInterview/MockInterviewSetup";
 import MockInterviewSession from "./pages/dashboard/mockInterview/MockInterviewSession";
@@ -24,13 +27,14 @@ function App() {
   return (
     <Routes>
 
-      {/* Public */}
+      {/* PUBLIC */}
       <Route
         path="/"
         element={<PublicLayout />}
       />
 
-      {/* Authentication */}
+
+      {/* AUTHENTICATION */}
       <Route
         path="/login"
         element={<Login />}
@@ -41,7 +45,8 @@ function App() {
         element={<Signup />}
       />
 
-      {/* Dashboard */}
+
+      {/* DASHBOARD*/}
       <Route
         path="/dashboard"
         element={<DashboardLayout />}
@@ -53,11 +58,23 @@ function App() {
           element={<Dashboard />}
         />
 
+
+        {/* DSA */}
+
         {/* /dashboard/dsa */}
         <Route
           path="dsa"
           element={<Dsa />}
         />
+
+        {/* /dashboard/dsa/:topic */}
+        <Route
+          path="dsa/:topic"
+          element={<DsaTopic />}
+        />
+
+
+        {/* CORE CS */}
 
         {/* /dashboard/core-cs */}
         <Route
@@ -65,13 +82,19 @@ function App() {
           element={<Core />}
         />
 
+
+        {/* APTITUDE  */}
+
         {/* /dashboard/aptitude */}
         <Route
           path="aptitude"
           element={<Aptitude />}
         />
 
-        {/* Mock Interview */}
+
+        {/* MOCK INTERVIEW  */}
+
+        {/* /dashboard/mock-interview */}
         <Route
           path="mock-interview"
           element={<MockInterview />}
