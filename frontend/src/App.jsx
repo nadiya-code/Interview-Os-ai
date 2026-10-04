@@ -17,6 +17,7 @@ import MockInterview from "./pages/dashboard/MockInterview";
 
 // DSA Pages
 import DsaTopic from "./pages/dashboard/dsa/DsaTopic";
+import DsaQuestion from "./pages/dashboard/dsa/DsaQuestion";
 
 // Mock Interview Pages
 import MockInterviewSetup from "./pages/dashboard/mockInterview/MockInterviewSetup";
@@ -33,7 +34,6 @@ function App() {
         element={<PublicLayout />}
       />
 
-
       {/* AUTHENTICATION */}
       <Route
         path="/login"
@@ -45,8 +45,7 @@ function App() {
         element={<Signup />}
       />
 
-
-      {/* DASHBOARD*/}
+      {/* DASHBOARD */}
       <Route
         path="/dashboard"
         element={<DashboardLayout />}
@@ -58,8 +57,7 @@ function App() {
           element={<Dashboard />}
         />
 
-
-        {/* DSA */}
+        {/* ================= DSA ================= */}
 
         {/* /dashboard/dsa */}
         <Route
@@ -73,8 +71,13 @@ function App() {
           element={<DsaTopic />}
         />
 
+        {/* /dashboard/dsa/:topic/:questionId */}
+        <Route
+          path="dsa/:topic/:questionId"
+          element={<DsaQuestion />}
+        />
 
-        {/* CORE CS */}
+        {/* ================= CORE CS ================= */}
 
         {/* /dashboard/core-cs */}
         <Route
@@ -82,8 +85,7 @@ function App() {
           element={<Core />}
         />
 
-
-        {/* APTITUDE  */}
+        {/* ================= APTITUDE ================= */}
 
         {/* /dashboard/aptitude */}
         <Route
@@ -91,8 +93,7 @@ function App() {
           element={<Aptitude />}
         />
 
-
-        {/* MOCK INTERVIEW  */}
+        {/* ================= MOCK INTERVIEW ================= */}
 
         {/* /dashboard/mock-interview */}
         <Route

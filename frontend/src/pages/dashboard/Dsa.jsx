@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import DsaTopics from "../../model/Dsa";
+import DsaTopics from "../../model/Dsa"
 
 function Dsa() {
   return (
@@ -11,12 +11,12 @@ function Dsa() {
         </h1>
 
         <p className="mt-2 max-w-2xl text-slate-500">
-          Learn DSA concepts, solve interview problems, and
-          track your progress.
+          Learn DSA concepts, solve interview problems, and track
+          your progress.
         </p>
       </div>
 
-      {/* Overall Progress */}
+      {/* Progress */}
       <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
@@ -62,7 +62,8 @@ function Dsa() {
                 bg-white
                 p-6
                 shadow-sm
-                transition duration-300
+                transition
+                duration-300
                 hover:-translate-y-1
                 hover:shadow-lg
               "
