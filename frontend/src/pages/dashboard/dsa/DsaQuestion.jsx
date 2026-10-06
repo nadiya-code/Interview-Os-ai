@@ -1,9 +1,11 @@
+import Editor from "@monaco-editor/react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import DsaQuestions from "../../../model/DsaQuestions";
 
 function DsaQuestion() {
   const { topic, questionId } = useParams();
-
+  const [code, setCode] = useState("");
   const question = DsaQuestions.find(
     (item) =>
       item.id === questionId &&
