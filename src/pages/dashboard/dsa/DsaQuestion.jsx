@@ -15,14 +15,48 @@ import {
 
 import DsaQuestions from "../../../model/DsaQuestions";
 
+// ================= LANGUAGE CONFIGURATION =================
+
+const LANGUAGES = [
+  { label: "C++", value: "cpp", languageId: 54 },
+  { label: "Python", value: "python", languageId: 71 },
+  { label: "Java", value: "java", languageId: 62 },
+  { label: "JavaScript", value: "javascript", languageId: 63 },
+];
+
+const LANGUAGE_TEMPLATES = {
+  cpp: `#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World";
+    return 0;
+}`,
+
+  python: `print("Hello World")`,
+
+  java: `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}`,
+
+  javascript: `console.log("Hello World");`,
+};
+
 function DsaQuestion() {
   const { topic, questionId } = useParams();
 
+  // ================= STATES =================
+
   const [code, setCode] = useState("");
+  const [language, setLanguage] = useState("cpp");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [executionError, setExecutionError] = useState("");
   const [isRunning, setIsRunning] = useState(false);
+
+  // ================= FIND QUESTION =================
 
   const question = DsaQuestions.find(
     (item) =>
@@ -30,14 +64,36 @@ function DsaQuestion() {
       item.topic === topic
   );
 
+  // ================= LOAD STARTER CODE =================
+
   useEffect(() => {
     if (question) {
-      setCode(question.starterCode?.cpp || "");
+      setCode(
+        question.starterCode?.[language] ||
+        LANGUAGE_TEMPLATES[language]
+      );
+
       setInput("");
       setOutput("");
       setExecutionError("");
     }
-  }, [question]);
+  }, [question, language]);
+
+  // ================= CHANGE LANGUAGE =================
+
+  const handleLanguageChange = (e) => {
+    const selectedLanguage = e.target.value;
+
+    setLanguage(selectedLanguage);
+
+    setCode(
+      question.starterCode?.[selectedLanguage] ||
+      LANGUAGE_TEMPLATES[selectedLanguage]
+    );
+
+    setOutput("");
+    setExecutionError("");
+  };
 
   // ================= RUN CODE =================
 
@@ -52,6 +108,10 @@ function DsaQuestion() {
       setOutput("");
       setExecutionError("");
 
+      const selectedLanguage = LANGUAGES.find(
+        (lang) => lang.value === language
+      );
+
       const response = await fetch(
         "http://localhost:3001/api/code/run",
         {
@@ -62,6 +122,7 @@ function DsaQuestion() {
           body: JSON.stringify({
             sourceCode: code,
             input: input,
+            languageId: selectedLanguage.languageId,
           }),
         }
       );
@@ -107,6 +168,8 @@ function DsaQuestion() {
     }
   };
 
+  // ================= QUESTION NOT FOUND =================
+
   if (!question) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-6">
@@ -134,6 +197,8 @@ function DsaQuestion() {
       </div>
     );
   }
+
+  // ================= MAIN UI =================
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -352,7 +417,8 @@ function DsaQuestion() {
 
                 {/* Editor Header */}
 
-                <div className="flex items-center justify-between border-b border-slate-700 bg-slate-800 px-4 py-3">
+                <div className="flex flex-col gap-3 border-b border-slate-700 bg-slate-800 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+
                   <div className="flex items-center gap-3">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10">
                       <Code2 size={17} className="text-blue-400" />
@@ -369,16 +435,30 @@ function DsaQuestion() {
                     </div>
                   </div>
 
-                  <div className="rounded-md border border-slate-600 bg-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-200">
-                    C++
-                  </div>
+                  {/* LANGUAGE DROPDOWN */}
+
+                  <select
+                    value={language}
+                    onChange={handleLanguageChange}
+                    className="rounded-md border border-slate-600 bg-slate-700 px-3 py-2 text-xs font-semibold text-white outline-none focus:border-blue-400"
+                  >
+                    {LANGUAGES.map((lang) => (
+                      <option
+                        key={lang.value}
+                        value={lang.value}
+                      >
+                        {lang.label}
+                      </option>
+                    ))}
+                  </select>
+
                 </div>
 
                 {/* Monaco Editor */}
 
                 <Editor
                   height="500px"
-                  language="cpp"
+                  language={language}
                   theme="vs-dark"
                   value={code}
                   onChange={(value) => setCode(value ?? "")}
@@ -408,7 +488,11 @@ function DsaQuestion() {
 
                     <div className="flex items-center gap-2 text-xs text-slate-400">
                       <Terminal size={14} />
-                      <span>C++</span>
+                      <span>
+                        {LANGUAGES.find(
+                          (lang) => lang.value === language
+                        )?.label}
+                      </span>
                       <span>•</span>
                       <span>Monaco Editor</span>
                     </div>
@@ -451,7 +535,7 @@ function DsaQuestion() {
                   </div>
 
                   <p className="mt-1 text-xs text-slate-500">
-                    Enter input for your C++ program.
+                    Enter input for your program.
                   </p>
                 </div>
 
