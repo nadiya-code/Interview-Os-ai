@@ -1,13 +1,19 @@
-const { executeCpp } = require("../services/judgeService");
+const { executeCode } = require("../services/judgeService");
+
+const SUPPORTED_LANGUAGE_IDS = [54, 71, 62, 63];
 
 const runCode = async (req, res) => {
   try {
-    const { sourceCode, input = "" } = req.body;
+    const {
+      sourceCode,
+      input = "",
+      languageId = 54,
+    } = req.body;
 
     if (typeof sourceCode !== "string" || !sourceCode.trim()) {
       return res.status(400).json({
         success: false,
-        message: "Please provide valid C++ source code.",
+        message: "Please provide valid source code.",
       });
     }
 
@@ -18,7 +24,20 @@ const runCode = async (req, res) => {
       });
     }
 
-    const result = await executeCpp(sourceCode, input);
+    const selectedLanguageId = Number(languageId);
+
+    if (!SUPPORTED_LANGUAGE_IDS.includes(selectedLanguageId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Unsupported programming language.",
+      });
+    }
+
+    const result = await executeCode(
+      sourceCode,
+      input,
+      selectedLanguageId
+    );
 
     return res.status(200).json({
       success: true,
@@ -35,7 +54,8 @@ const runCode = async (req, res) => {
       error.response?.data || error.message
     );
 
-    const statusCode = error.response?.status === 429 ? 429 : 500;
+    const statusCode =
+      error.response?.status === 429 ? 429 : 500;
 
     return res.status(statusCode).json({
       success: false,
